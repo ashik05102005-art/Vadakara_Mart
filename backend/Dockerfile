@@ -30,5 +30,5 @@ COPY . /app/
 # Expose Daphne default port
 EXPOSE 8000
 
-# Run Daphne ASGI server
-CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "geomart.asgi:application"]
+# Run database migrations, seed local shops, and start Daphne ASGI server
+CMD ["sh", "-c", "python manage.py migrate && python manage.py seed_data && daphne -b 0.0.0.0 -p 8000 geomart.asgi:application"]
