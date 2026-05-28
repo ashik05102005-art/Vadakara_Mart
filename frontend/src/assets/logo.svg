@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <!-- Soft shadow for depth -->
+    <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#f43f5e" flood-opacity="0.25"/>
+    </filter>
+    <!-- Main premium rose-to-red gradient -->
+    <linearGradient id="vmGradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <!-- Supporting accent gradient -->
+    <linearGradient id="accentGradient" x1="0" y1="100" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="100%" stop-color="#fda4af" />
+    </linearGradient>
+    <!-- Shiny glass highlight -->
+    <linearGradient id="glassGradient" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="white" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="white" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background tile -->
+  <rect x="5" y="5" width="90" height="90" rx="24" fill="url(#vmGradient)" filter="url(#logoShadow)" />
+  <rect x="8" y="8" width="84" height="84" rx="21" stroke="url(#accentGradient)" stroke-width="2.5" stroke-opacity="0.6" />
+  
+  <!-- Glass shine overlay -->
+  <rect x="5" y="5" width="90" height="45" rx="24" fill="url(#glassGradient)" />
+
+  <!-- Geometric Stylized V -->
+  <path d="M26 30 L44 70 C46 74, 54 74, 56 70 L74 30" stroke="white" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Geometric Stylized M connector -->
+  <path d="M52 52 L62 30 L76 70" stroke="url(#accentGradient)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Hyperlocal Map Pin dot in the center of V -->
+  <circle cx="50" cy="40" r="5" fill="white" />
+</svg>
