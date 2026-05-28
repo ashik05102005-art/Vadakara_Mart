@@ -14,6 +14,7 @@ import OrderTracking from './pages/OrderTracking';
 import ShopDashboard from './pages/ShopDashboard';
 import DeliveryDashboard from './pages/DeliveryDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import NotFound from './pages/NotFound';
 
 // Custom Protected Route Guard
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -252,8 +253,12 @@ function App() {
           </ProtectedRoute>
         } />
 
-        {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Catch-all 404 error page wrapped inside standard shell layout */}
+        <Route path="*" element={
+          <ShellLayout>
+            <NotFound />
+          </ShellLayout>
+        } />
       </Routes>
     </BrowserRouter>
   );
