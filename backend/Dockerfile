@@ -22,7 +22,8 @@ RUN pip install --no-cache-dir \
     django-cors-headers==4.9.0 \
     daphne==4.2.1 \
     channels==4.3.2 \
-    Pillow==12.2.0
+    Pillow==12.2.0 \
+    psycopg2-binary==2.9.10
 
 # Copy application files
 COPY . /app/

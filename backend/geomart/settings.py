@@ -81,12 +81,34 @@ ASGI_APPLICATION = 'geomart.asgi.application' # ASGI setup for Django Channels
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database Configuration (Postgres in Production, SQLite in Development)
+import urllib.parse
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    # Parse the PostgreSQL URL provided by Railway
+    url = urllib.parse.urlparse(DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port or 5432,
+        }
     }
-}
+    print("🔌 [Production] Connecting to cloud PostgreSQL database.")
+else:
+    # Fallback to SQLite for easy local developer testing
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+    print("📁 [Development] Connecting to local SQLite database.")
 
 
 # Custom User Model
