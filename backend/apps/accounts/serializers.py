@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from .models import Address
-from apps.delivery.models import DeliveryPartnerProfile
+from ..delivery.models import DeliveryPartnerProfile
 
 User = get_user_model()
 
@@ -29,8 +29,14 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Hash password and save
         validated_data['password'] = make_password(validated_data['password'])
-        # Email acts as unique identifier
-        username = validated_data.get('username') or validated_data.get('email').split('@')[0]
+        
+        # Email acts as unique identifier: generate a robust unique username if none provided
+        base_username = validated_data.get('username') or validated_data.get('email').split('@')[0]
+        username = base_username
+        counter = 1
+        while User.objects.filter(username=username).exists():
+            username = f"{base_username}{counter}"
+            counter += 1
         validated_data['username'] = username
         
         user = super().create(validated_data)

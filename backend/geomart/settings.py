@@ -99,7 +99,7 @@ if DATABASE_URL:
             'PORT': url.port or 5432,
         }
     }
-    print("🔌 [Production] Connecting to cloud PostgreSQL database.")
+    print("[Production] Connecting to cloud PostgreSQL database.")
 else:
     # Fallback to SQLite for easy local developer testing
     DATABASES = {
@@ -108,7 +108,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-    print("📁 [Development] Connecting to local SQLite database.")
+    print("[Development] Connecting to local SQLite database.")
 
 
 # Custom User Model
